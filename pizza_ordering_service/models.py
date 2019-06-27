@@ -12,6 +12,9 @@ class Order(models.Model):
         ordering = ('created',)
 
 class Pizza(models.Model):
-    flavor = models.CharField(choices=PIZZA_FLAVORS, max_length=1)
-    size = models.CharField(choices=PIZZA_SIZES, max_length=1)
+    flavor = models.CharField(choices=PIZZA_FLAVORS, max_length=50)
+    size = models.CharField(choices=PIZZA_SIZES, max_length=50)
     amount = models.IntegerField(default=1)
+
+    def get_pizza(self):
+        return f'{self.amount} {self.size} pizza {self.flavor}'

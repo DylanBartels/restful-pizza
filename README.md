@@ -17,23 +17,36 @@ Coding task for mcb-lab involving Django restful
 
 ## Installation
 
+### Project
+
 ```bash
 git clone https://github.com/DylanBartels/mcb-lab.git
 cd mcb-lab
 python3 -m venv env
 source env/bin/activate
 pip install requirements.txt
+```
+
+### Database
+
+```sqlp
+CREATE DATABASE mcb_lab;
+CREATE USER admin WITH ENCRYPTED PASSWORD 'admin';
+GRANT ALL PRIVILEGES ON DATABASE mcb_lab TO admin;
+ALTER USER admin CREATEDB;
+```
+
+```bash
 python manage.py makemigrations pizza_ordering_service
 python manage.py migrate
 ```
 
-todo:
-- add installation psql
-
 ## Usage
 
 ```bash
+pg_start
 python manage.py runserver
+pg_stop
 ```
 
 ## Tests

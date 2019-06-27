@@ -3,21 +3,21 @@ from pizza_ordering_service.serializers import OrderSerializer, PizzaSerializer
 from rest_framework import generics
 
 
-class OrderList(generics.ListAPIView):
+class OrderList(generics.ListCreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
 
-class OrderDetail(generics.RetrieveAPIView):
+class OrderDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
 
-class PizzaList(generics.ListAPIView):
+class PizzaList(generics.ListCreateAPIView):
     queryset = Pizza.objects.all()
     serializer_class = PizzaSerializer
 
 
-class PizzaDetail(generics.RetrieveAPIView):
+class PizzaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Pizza.objects.all()
     serializer_class = PizzaSerializer

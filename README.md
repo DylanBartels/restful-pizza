@@ -12,6 +12,7 @@ Coding task for mcb-lab involving Django restful
 
 - python3
 - postgresql
+  - https://gist.github.com/ibraheem4/ce5ccd3e4d7a65589ce84f2a3b7c23a3
 
 
 ## Installation
@@ -25,6 +26,9 @@ pip install requirements.txt
 python manage.py makemigrations pizza_ordering_service
 python manage.py migrate
 ```
+
+todo:
+- add installation psql
 
 ## Usage
 

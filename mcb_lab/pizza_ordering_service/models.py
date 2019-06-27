@@ -1,7 +1,7 @@
 from django.db import models
 
 STATUS_CHOICES = ['ordered', 'preparing', 'delivering', 'delivered']
-PIZZA_FLAVOURS = ['margherita', 'pepperoni', 'mozzarella']
+PIZZA_FLAVORS = ['margherita', 'pepperoni', 'mozzarella']
 PIZZA_SIZES = ['small', 'medium', 'large']
 
 class Order(models.Model):
@@ -12,9 +12,9 @@ class Order(models.Model):
         ordering = ('created',)
 
 class Pizza(models.Model):
-    flavor = models.MultipleChoiceField(required=True, choices=PIZZA_FLAVOURS)
+    flavor = models.MultipleChoiceField(required=True, choices=PIZZA_FLAVORS)
     size = models.MultipleChoiceField(required=True, choices=PIZZA_SIZES)
-    number = models.IntegerField(required=True, default=1)
+    amount = models.IntegerField(required=True, default=1)
 
     class Meta:
         ordering = ('created',)

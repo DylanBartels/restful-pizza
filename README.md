@@ -50,3 +50,7 @@ pg_stop
 ```
 
 ## Tests
+
+```bash
+python manage.py test
+```

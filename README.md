@@ -7,6 +7,7 @@ Coding task
 python3 -m venv env
 source env/bin/activate
 pip install requirements.txt
+python manage.py makemigrations pizza_ordering_service
 python manage.py migrate
-python manage.py createsuperuser --email admin@example.com --username admin
+python manage.py runserver
 ```

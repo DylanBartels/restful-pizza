@@ -2,20 +2,15 @@ from rest_framework import serializers
 from pizza_ordering_service.models import Pizza, Order
 
 
-class OrderSerializer(serializers.HyperlinkedModelSerializer):
-    pizzas = serializers.HyperlinkedRelatedField(
-        many=True,
-        read_only=True,
-        view_name='pizza-detail'
-    )
+## PrimaryKeyRelatedField
+class PizzaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pizza
+        fields = '__all__'
+
+class OrderSerializer(serializers.ModelSerializer):
+    pizzas = serializers.PrimaryKeyRelatedField(many=True, queryset=Pizza.objects.all())
 
     class Meta:
         model = Order
-        fields = '__all__'
-
-
-class PizzaSerializer(serializers.HyperlinkedModelSerializer):
-
-    class Meta:
-        model = Pizza
         fields = '__all__'

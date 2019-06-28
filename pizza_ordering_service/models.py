@@ -11,6 +11,9 @@ class Order(models.Model):
     class Meta:
         ordering = ('created',)
 
+    def __str__(self):
+        return f'id: {self.id}'
+
 class Pizza(models.Model):
     order = models.ForeignKey(Order, related_name='pizzas', on_delete=models.CASCADE)
     flavor = models.CharField(choices=PIZZA_FLAVORS, max_length=50)

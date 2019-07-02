@@ -2,8 +2,13 @@ from django.db import models
 from django.core.validators import MinValueValidator
 
 
-# todo add price in tuple?
-STATUS_CHOICES = [(x, x) for x in ['creating', 'ordered', 'preparing', 'delivering', 'delivered']]
+STATUS_CHOICES = (
+	('created', 'Created'),
+	('paid', 'Paid'),
+	('preparing', 'Preparing'),
+	('delivering', 'Delivering'),
+    ('delivered', 'Delivered')
+)
 PIZZA_FLAVORS = [(x, x) for x in ['margherita', 'pepperoni', 'mozzarella']]
 PIZZA_SIZES = [(x, x) for x in ['small', 'medium', 'large']]
 
@@ -12,7 +17,7 @@ class Pizza(models.Model):
     flavor = models.CharField(choices=PIZZA_FLAVORS, max_length=50)
     size   = models.CharField(choices=PIZZA_SIZES, max_length=50)
     amount = models.IntegerField(default=1, validators=[MinValueValidator(1)])
-    price  = models.DecimalField(decimal_places=2, max_digits=5, default=0)
+    price  = models.DecimalField(decimal_places=2, max_digits=5, default=0.00)
 
     def __str__(self):
         return f'{self.amount} {self.size} pizza {self.flavor}'
@@ -33,11 +38,12 @@ class User(models.Model):
 
 
 class Order(models.Model):
-    user    = models.ForeignKey(User, related_name='users', on_delete=models.CASCADE)
-    pizzas  = models.ManyToManyField(Pizza)
-    created = models.DateTimeField(auto_now_add=True)
-    status  = models.CharField(choices=STATUS_CHOICES, default='ordered', max_length=50)
-    payment = models.BooleanField(default=False)
+    created  = models.DateTimeField(auto_now_add=True)
+    status   = models.CharField(choices=STATUS_CHOICES, default='ordered', max_length=50)
+    payment  = models.BooleanField(default=False)
+    subtotal = models.DecimalField(max_digits=50, decimal_places=2, default=0.00)
+    pizzas   = models.ManyToManyField(Pizza)
+    user     = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     class Meta:
         ordering = ('created',)
@@ -45,7 +51,9 @@ class Order(models.Model):
     def __str__(self):
         return f'id: {self.id}'
 
-    @property
-    def total_price(self):
-        qs = self.pizzas.through.objects.all().aggregate(total_price=models.Sum('pizza__price'))
-        return qs['total_price']
+    # def update_subtotal(self):
+	# 	subtotal = 0
+	# 	for pizza in self.pizzas.all():
+	# 		subtotal += pizza.price
+	# 	self.subtotal = "%.2f" %(subtotal)
+    #     self.save()

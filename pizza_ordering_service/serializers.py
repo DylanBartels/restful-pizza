@@ -1,24 +1,27 @@
 from rest_framework import serializers
 from pizza_ordering_service.models import Pizza, Order, User
+from drf_writable_nested import WritableNestedModelSerializer
 
 
-## PrimaryKeyRelatedField
 class PizzaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pizza
         fields = '__all__'
 
-class OrderSerializer(serializers.ModelSerializer):
-    # ordered_pizzas = PizzaSerializer(many=True)
-    # pizzas = serializers.PrimaryKeyRelatedField(many=True, queryset=Pizza.objects.all())
+
+class OrderSerializer(WritableNestedModelSerializer):
+    pizzas = PizzaSerializer(many=True)
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required=False)
+    subtotal = serializers.IntegerField(read_only=True)
+    payment = serializers.BooleanField(read_only=True)
 
     class Meta:
         model = Order
         fields = '__all__'
+        depth = 1
+
 
 class UserSerializer(serializers.ModelSerializer):
-    # orders = serializers.PrimaryKeyRelatedField(many=True, queryset=Order.objects.all())
-
     class Meta:
         model = User
         fields = '__all__'

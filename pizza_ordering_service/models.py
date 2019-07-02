@@ -9,8 +9,16 @@ STATUS_CHOICES = (
 	('delivering', 'Delivering'),
     ('delivered', 'Delivered')
 )
-PIZZA_FLAVORS = [(x, x) for x in ['margherita', 'pepperoni', 'mozzarella']]
-PIZZA_SIZES = [(x, x) for x in ['small', 'medium', 'large']]
+PIZZA_FLAVORS = (
+    ('margherita', 'Margherita'),
+    ('pepperoni', 'Pepperoni'),
+    ('mozzarella', 'Mozzarella')
+)
+PIZZA_SIZES = (
+    ('small', 'Small'),
+    ('medium', 'Medium'),
+    ('large', 'Large')
+)
 
 
 class Pizza(models.Model):

@@ -23,7 +23,7 @@ class Pizza(models.Model):
         return f'{self.amount} {self.size} pizza {self.flavor}'
 
 
-class User(models.Model):
+class Customer(models.Model):
     customer_name    = models.CharField(max_length=100, default='')
     created          = models.DateTimeField(auto_now_add=True)
     customer_address = models.CharField(max_length=100, default='')
@@ -43,7 +43,7 @@ class Order(models.Model):
     payment  = models.BooleanField(default=False)
     subtotal = models.DecimalField(max_digits=50, decimal_places=2, default=0.00)
     pizzas   = models.ManyToManyField(Pizza)
-    user     = models.ForeignKey(User, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('created',)

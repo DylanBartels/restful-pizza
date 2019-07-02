@@ -1,9 +1,9 @@
 from rest_framework.routers import SimpleRouter
+from pizza_ordering_service.views import CustomerViewSet, OrderViewSet, PizzaViewSet
 
-from pizza_ordering_service.views import UserViewSet, OrderViewSet, PizzaViewSet
 
 router = SimpleRouter()
-router.register("users", UserViewSet)
+router.register("customers", CustomerViewSet)
 router.register("orders", OrderViewSet)
 router.register("pizzas", PizzaViewSet)
 

@@ -1,11 +1,11 @@
 from rest_framework.viewsets import ModelViewSet
-from pizza_ordering_service.serializers import UserSerializer, OrderSerializer, PizzaSerializer
-from pizza_ordering_service.models import User, Order, Pizza
+from pizza_ordering_service.serializers import CustomerSerializer, OrderSerializer, PizzaSerializer
+from pizza_ordering_service.models import Customer, Order, Pizza
 
 
-class UserViewSet(ModelViewSet):
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
+class CustomerViewSet(ModelViewSet):
+    serializer_class = CustomerSerializer
+    queryset = Customer.objects.all()
 
 
 class OrderViewSet(ModelViewSet):
@@ -13,7 +13,7 @@ class OrderViewSet(ModelViewSet):
     queryset = (
         Order.objects
             .select_related(
-                'user',
+                'customer',
             )
             .prefetch_related(
                 'pizzas',

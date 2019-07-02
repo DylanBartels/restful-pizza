@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from drf_writable_nested import WritableNestedModelSerializer
-from pizza_ordering_service.models import Pizza, Order, User
+from pizza_ordering_service.models import Pizza, Order, Customer
 
 
 class PizzaSerializer(serializers.ModelSerializer):
@@ -9,14 +9,14 @@ class PizzaSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UserSerializer(serializers.ModelSerializer):
+class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = Customer
         fields = '__all__'
 
 
 class OrderSerializer(WritableNestedModelSerializer):
-    user     = UserSerializer()
+    customer = CustomerSerializer()
     pizzas   = PizzaSerializer(many=True)
     subtotal = serializers.IntegerField(read_only=True)
     payment  = serializers.BooleanField(read_only=True)

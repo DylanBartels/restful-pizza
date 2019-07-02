@@ -10,7 +10,25 @@ class UserViewSet(ModelViewSet):
 
 class OrderViewSet(ModelViewSet):
     serializer_class = OrderSerializer
-    queryset = Order.objects.all()
+    queryset = (
+        Order.objects
+            .select_related(
+                'user',
+            )
+            .prefetch_related(
+                'pizzas',
+            )
+        )
+
+    def dispatch(self, *args, **kwargs):
+        response = super().dispatch(*args, **kwargs)
+
+        # For debugging purposes only.
+        from django.db import connection
+        print('# of Queries: {}'.format(len(connection.queries)))
+        for query in connection.queries:
+            print(query['sql'])
+        return response
 
 
 class PizzaViewSet(ModelViewSet):

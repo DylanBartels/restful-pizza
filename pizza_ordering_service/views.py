@@ -1,4 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
+from django_filters.rest_framework import DjangoFilterBackend
 from pizza_ordering_service.serializers import CustomerSerializer, OrderSerializer, PizzaSerializer
 from pizza_ordering_service.models import Customer, Order, Pizza
 
@@ -12,13 +13,11 @@ class OrderViewSet(ModelViewSet):
     serializer_class = OrderSerializer
     queryset = (
         Order.objects
-            .select_related(
-                'customer',
-            )
-            .prefetch_related(
-                'pizzas',
-            )
+            .select_related('customer')
+            .prefetch_related('pizzas')
         )
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ('status', 'customer',)
 
     def dispatch(self, *args, **kwargs):
         response = super().dispatch(*args, **kwargs)

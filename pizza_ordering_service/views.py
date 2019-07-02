@@ -17,7 +17,7 @@ class OrderViewSet(ModelViewSet):
             .prefetch_related('pizzas')
         )
     filter_backends = (DjangoFilterBackend,)
-    filterset_fields = ('status', 'customer',)
+    filterset_fields = ('status', 'customer__name',)
 
     def dispatch(self, *args, **kwargs):
         response = super().dispatch(*args, **kwargs)

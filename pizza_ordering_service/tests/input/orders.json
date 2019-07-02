@@ -1,23 +1,22 @@
 {
     "customer": {
-        "customer_name": "Dylan Bartels",
-        "customer_address": "AlleStrabe 86",
-        "customer_city": "Berlin",
+        "name": "Dylan Bartels",
+        "address": "AlleStrabe 86",
+        "city": "Berlin",
         "zip_code": "781644"
     },
     "pizzas": [
-        {
-            "flavor": "margherita",
-            "size": "small",
-            "amount": 10,
-            "price": "100.00"
-        },
-        {
-            "flavor": "pepperoni",
-            "size": "medium",
-            "amount": 2,
-            "price": "24.00"
-        }
+      {
+        "flavor": "margherita",
+        "size": "small",
+        "quantity": 10
+      },
+      {
+        "flavor": "pepperoni",
+        "size": "large",
+        "quantity": 4
+      }
     ],
+    "payment": true,
     "status": "created"
 }

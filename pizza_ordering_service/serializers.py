@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from drf_writable_nested import WritableNestedModelSerializer
 from pizza_ordering_service.models import Pizza, Order, Customer, Specification
 
 

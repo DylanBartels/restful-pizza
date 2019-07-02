@@ -1,0 +1,18 @@
+{
+    "pizzas": [
+        {
+            "flavor": "margherita",
+            "size": "small",
+            "amount": 10,
+            "price": "100.00"
+        },
+        {
+            "flavor": "pepperoni",
+            "size": "medium",
+            "amount": 2,
+            "price": "24.00"
+        }
+    ],
+    "user": 1,
+    "status": "created"
+}

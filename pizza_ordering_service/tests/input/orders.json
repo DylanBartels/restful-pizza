@@ -1,4 +1,10 @@
 {
+    "customer": {
+        "customer_name": "Dylan Bartels",
+        "customer_address": "AlleStrabe 86",
+        "customer_city": "Berlin",
+        "zip_code": "781644"
+    },
     "pizzas": [
         {
             "flavor": "margherita",
@@ -13,6 +19,5 @@
             "price": "24.00"
         }
     ],
-    "user": 1,
     "status": "created"
 }

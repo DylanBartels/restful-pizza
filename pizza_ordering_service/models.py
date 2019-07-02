@@ -43,7 +43,7 @@ class Order(models.Model):
     payment  = models.BooleanField(default=False)
     subtotal = models.DecimalField(max_digits=50, decimal_places=2, default=0.00)
     pizzas   = models.ManyToManyField(Pizza)
-    user     = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user     = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('created',)

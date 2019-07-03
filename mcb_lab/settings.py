@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'mcb_lab.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mcb_lab',
+        'NAME': 'mcb_lab_dylan_bartels',
         'USER': 'admin',
         'PASSWORD': 'admin',
         'HOST': '127.0.0.1',

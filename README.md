@@ -30,9 +30,9 @@ pip install requirements.txt
 ### Database
 
 ```sqlp
-CREATE DATABASE mcb_lab;
+CREATE DATABASE mcb_lab_dylan_bartels;
 CREATE USER admin WITH ENCRYPTED PASSWORD 'admin';
-GRANT ALL PRIVILEGES ON DATABASE mcb_lab TO admin;
+GRANT ALL PRIVILEGES ON DATABASE mcb_lab_dylan_bartels TO admin;
 ALTER USER admin CREATEDB;
 ```
 
@@ -48,6 +48,8 @@ pg_start
 python manage.py runserver
 pg_stop
 ```
+
+
 
 ## Tests
 

@@ -53,7 +53,7 @@ class Order(models.Model):
         ordering = ('created',)
 
     def __str__(self):
-        return f'id: {self.id}'
+        return f'{self.status} order containing: {len(self.pizzas.all())} pizzas'
 
 
 class Specification(models.Model):
@@ -61,3 +61,6 @@ class Specification(models.Model):
     order    = models.ForeignKey(Order, on_delete=models.CASCADE)
     size     = models.CharField(choices=PIZZA_SIZES, max_length=50, default='medium')
     quantity = models.IntegerField(validators=[MinValueValidator(1)], default=1)
+
+    def __str__(self):
+        return f'{self.quantity} {self.size} pizza {self.pizza}'

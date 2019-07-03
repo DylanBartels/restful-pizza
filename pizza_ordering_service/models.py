@@ -25,7 +25,7 @@ class Pizza(models.Model):
     flavor     = models.CharField(choices=PIZZA_FLAVORS, max_length=50, unique=True)
 
     def __str__(self):
-        return f'{self.amount} {self.size} pizza {self.flavor}'
+        return f'{self.flavor}'
 
 
 class Customer(models.Model):
@@ -39,7 +39,7 @@ class Customer(models.Model):
         ordering = ('created',)
 
     def __str__(self):
-        return f'{self.customer_name}'
+        return f'{self.name}'
 
 
 class Order(models.Model):

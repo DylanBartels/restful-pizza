@@ -1,33 +1,28 @@
 from django.test import TestCase
-from ..models import Pizza, Order
+from ..models import Pizza, Order, Customer, Specification
+from .helpers import get_dummy_order
 
 
 class PizzaTest(TestCase):
     """ Test module for Pizza model """
 
     def setUp(self):
-        Order.objects.create(status='creating')
-        Pizza.objects.create(flavor='margherita', size='small', order=Order.objects.get(status='creating'))
-        Pizza.objects.create(flavor='pepperoni', size='medium', order=Order.objects.get(status='creating'))
-        Pizza.objects.create(flavor='mozzarella', size='large', order=Order.objects.get(status='creating'))
+        get_dummy_order()
 
     def test_pizza(self):
-        pizza_small_margherita = Pizza.objects.get(flavor='margherita')
-        pizza_medium_pepperoni = Pizza.objects.get(flavor='pepperoni')
-        pizza_large_mozzarella = Pizza.objects.get(flavor='mozzarella')
+        pizza_small_mozzarella = Specification.objects.get(size='small')
+        pizza_medium_margherita = Specification.objects.get(size='medium')
+        pizza_large_pepperoni = Specification.objects.get(size='large')
 
-        self.assertEqual(str(pizza_small_margherita), '1 small pizza margherita')
-        self.assertEqual(str(pizza_medium_pepperoni), '1 medium pizza pepperoni')
-        self.assertEqual(str(pizza_large_mozzarella), '1 large pizza mozzarella')
+        self.assertEqual(str(pizza_small_mozzarella), '3 small pizza mozzarella')
+        self.assertEqual(str(pizza_medium_margherita), '30 medium pizza margherita')
+        self.assertEqual(str(pizza_large_pepperoni), '7 large pizza pepperoni')
 
 class OrderTest(TestCase):
     """ Test module for Order model """
 
     def setUp(self):
-        Order.objects.create(status='creating')
-        Pizza.objects.create(flavor='margherita', size='small', order=Order.objects.get(status='creating'))
-        Pizza.objects.create(flavor='pepperoni', size='medium', order=Order.objects.get(status='creating'))
-        Pizza.objects.create(flavor='mozzarella', size='large', order=Order.objects.get(status='creating'))
+        get_dummy_order()
 
     def test_order(self):
         order = Order.objects.get(status='creating')

@@ -22,11 +22,12 @@ class OrderViewSet(ModelViewSet):
     def dispatch(self, *args, **kwargs):
         response = super().dispatch(*args, **kwargs)
 
-        # For debugging purposes only.
-        from django.db import connection
-        print('# of Queries: {}'.format(len(connection.queries)))
-        for query in connection.queries:
-            print(query['sql'])
+        # # For debugging purposes only.
+        # from django.db import connection
+        # print('# of Queries: {}'.format(len(connection.queries)))
+        # for query in connection.queries:
+        #     print(query['sql'])
+        
         return response
 
 

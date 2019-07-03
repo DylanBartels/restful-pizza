@@ -55,6 +55,25 @@ class OrderSerializer(serializers.ModelSerializer):
         return order
 
     def update(self, instance, validated_data):
-        # Currently not updating but creating another object
-        Order.objects.filter(id=instance.id).delete()
-        return self.create(validated_data)
+        if instance.status != "delivered":
+            if "pizzas" in self.initial_data:
+                if is_list(self.initial_data.get("pizzas"), "pizzas"):
+                    pizzas = self.initial_data.get("pizzas")
+                    order = Order.objects.get(id=instance.id)
+                    old_specs = Specification.objects.filter(order=order)
+                    old_specs.delete()
+
+                    for pizza in pizzas:
+                        if is_dict(pizza, "pizza"):
+                            pizza_data = SpecificationSerializer(data=pizza)
+                            if pizza_data.is_valid():
+                                size = pizza.get("size")
+                                quantity = pizza.get("quantity")
+                                pizza_instance = Pizza.objects.get(flavor=pizza.get("flavor"))
+                                Specification(order=order, pizza=pizza_instance, size=size, quantity=quantity).save()
+
+            instance.status = validated_data["status"]
+            instance.save()
+            return instance
+        else:
+            raise serializers.ValidationError("Delivered orders cannot be changed")

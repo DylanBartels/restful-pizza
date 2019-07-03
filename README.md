@@ -36,7 +36,8 @@ pip install requirements.txt
 
 ### Database
 
-```sqlp
+```bash
+psql -d postgres
 CREATE DATABASE mcb_lab_dylan_bartels;
 CREATE USER admin WITH ENCRYPTED PASSWORD 'admin';
 GRANT ALL PRIVILEGES ON DATABASE mcb_lab_dylan_bartels TO admin;

@@ -3,11 +3,11 @@ Coding task for mcb-lab involving Django restful
 
 ## Table of Contents
 
+- [Design](#designs)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Tests](#tests)
-- [Design](#designs)
 
 ## Design
 
@@ -90,6 +90,32 @@ Put the three pizzas in the pizzas database using the html form.
     * Allow filtering by status / customer.
         * Possible with url and UI filter button in right top corner. (http://localhost:8000/orders/?status=created&customer__name=Dylan+Bartels)
 
+### Example post
+
+```json
+{
+    "customer": {
+        "name": "Dylan Bartels",
+        "address": "Kantstrasse 86",
+        "city": "Berlin",
+        "zip_code": "781644"
+    },
+    "pizzas": [
+      {
+        "flavor": "margherita",
+        "size": "small",
+        "quantity": 10
+      },
+      {
+        "flavor": "pepperoni",
+        "size": "large",
+        "quantity": 4
+      }
+    ],
+    "payment": true,
+    "status": "created"
+}
+```
 
 ## Tests
 

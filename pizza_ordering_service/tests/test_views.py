@@ -46,6 +46,7 @@ class CreateNewOrderTest(TestCase):
     """ Test module for inserting a new order """
 
     def setUp(self):
+        get_dummy_order()
         self.valid_payload = {
             "customer": {
                 "name": "Dylan Bartels",
@@ -53,8 +54,22 @@ class CreateNewOrderTest(TestCase):
                 "city": "Berlin",
                 "zip_code": "781644"
             },
+            "pizzas": [
+              {
+                "flavor": "margherita",
+                "size": "small",
+                "quantity": 10
+              },
+              {
+                "flavor": "pepperoni",
+                "size": "large",
+                "quantity": 4
+              }
+            ],
+            "payment": True,
             "status": "created"
         }
+
         self.invalid_payload = {
             'flavor': 'pepperoni',
             'size': 'large',

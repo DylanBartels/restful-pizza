@@ -1,6 +1,3 @@
-# mcb-lab
-Coding task for mcb-lab involving Django restful
-
 ## Table of Contents
 
 - [Design](#designs)
@@ -13,47 +10,15 @@ Coding task for mcb-lab involving Django restful
 
 The model / database structure is composed out of Order, Customer, Specification and Pizza. The Order has a one-on-one relation with the Customer, the Order has a many-to-many relationship with Pizza through Specification. This way the order can be composed of whatever is specified in the Pizza database and the quantity and size are attributes of Specification.
 
-I chose for this structure because it sets the foundation for a robust service. Whoever has permission to write to the pizza database can decide what is being served, also extra future attributes can be included e.g. pizza base price. From the Specification the elements as size and quantity can decide what the effect on the pizza base price can be. This setup gives modularity where it is needed.
-
 ## Requirements
 
-- python3
-- postgresql
-  - https://gist.github.com/ibraheem4/ce5ccd3e4d7a65589ce84f2a3b7c23a3
-
+- docker
 
 ## Installation
 
-### Project
-
 ```bash
-git clone https://github.com/DylanBartels/mcb-lab.git
-cd mcb-lab
-python3 -m venv env
-source env/bin/activate
-pip install requirements.txt
-```
-
-### Database
-
-```bash
-psql -d postgres
-CREATE DATABASE mcb_lab_dylan_bartels;
-CREATE USER admin WITH ENCRYPTED PASSWORD 'admin';
-GRANT ALL PRIVILEGES ON DATABASE mcb_lab_dylan_bartels TO admin;
-ALTER USER admin CREATEDB;
-```
-
-```bash
-python manage.py makemigrations pizza_ordering_service
-python manage.py migrate
-```
-
-## Usage
-
-```bash
-pg_start
-python manage.py runserver
+docker-compose build
+docker-compose up
 ```
 
 ### Populate pizzas database
@@ -62,7 +27,7 @@ visit: http://localhost:8000/pizzas/
 
 Put the three pizzas in the pizzas database using the html form.
 
-### Coding Task Requirements
+## Usage
 
 * Order pizzas: (http://localhost:8000/orders/)
     * should be possible to specify the desired flavors of pizza, the number of pizzas and their size.
